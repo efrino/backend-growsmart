@@ -1,9 +1,9 @@
-const Hapi = require('@hapi/hapi');
+import Hapi from '@hapi/hapi';
 
 const init = async () => {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
-    host: '0.0.0.0', // penting agar bisa diakses di Render
+    host: '0.0.0.0', // Penting agar bisa diakses di Render
   });
 
   server.route({
@@ -13,11 +13,11 @@ const init = async () => {
   });
 
   await server.start();
-  console.log('Server running on %s', server.info.uri);
+  console.log(`✅ Server running on ${server.info.uri}`);
 };
 
 process.on('unhandledRejection', err => {
-  console.log(err);
+  console.error(err);
   process.exit(1);
 });
 
