@@ -2,9 +2,10 @@
 
 GrowSmart Backend terdiri dari dua layanan terpisah:
 
-1. **Hapi.js Backend (Node.js)** – API utama untuk mengelola user, data anak, prediksi, dan koneksi ke backend ML.
-2. **Flask Backend (Python)** – API khusus untuk melakukan prediksi stunting menggunakan model TensorFlow.
-
+1. **[Hapi.js Backend (Node.js)](https://github.com/efrino/hapi-backend.git)** – API utama untuk mengelola user, data anak, prediksi, dan koneksi ke backend ML.
+   - 🌐 [Production](https://hapi-backend-36vb.onrender.com)
+2. **[Flask Backend (Python)](https://github.com/efrino/flask-backend.git)** – API khusus untuk melakukan prediksi stunting menggunakan model TensorFlow.
+   - 🌐 [Production](https://flask-backend-1s35.onrender.com/)
 ---
 
 ## 🗂 Struktur Proyek
@@ -131,14 +132,18 @@ Frontend → Hapi.js → Flask → Hapi.js → Frontend
 Kamu bisa deploy **secara terpisah**:
 
 - **Hapi.js Backend**: Render, Railway, Heroku, atau Vercel
+🌐 https://hapi-backend-36vb.onrender.com
+
 - **Flask Backend**: Render, Railway, Heroku
+🌐 https://flask-backend-1s35.onrender.com
+
 
 ⚠️ Jangan lupa:
 
 - Gunakan URL publik Flask di environment `.env` milik Hapi.js:
 
   ```env
-  FLASK_API_URL=https://flask-grow.smart-api.com
+FLASK_API_URL=https://flask-backend-1s35.onrender.com/status
   ```
 
 - Pastikan environment variable disesuaikan di masing-masing platform.
@@ -175,5 +180,5 @@ Jika kamu memiliki pertanyaan, bug report, atau ingin berkontribusi:
 
 ---
 
-Terima kasih telah menggunakan **GrowSmart Backend**!  
+Terima kasih telah menggunakan **GrowSmart Backend**!
 Bersama kita bantu pencegahan stunting sedini mungkin. 🌱📊
