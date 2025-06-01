@@ -1,125 +1,140 @@
-# GrowSmart Backend
+# 🌱 GrowSmart Backend
 
-Proyek ini terdiri dari dua backend terpisah:
+GrowSmart Backend terdiri dari **dua layanan backend terpisah** yang saling terintegrasi untuk mendukung fitur prediksi stunting:
 
 1. **Hapi.js Backend (Node.js)**  
-   Menangani API utama aplikasi dan menghubungkan frontend dengan backend ML.
+   Menangani API utama aplikasi, autentikasi, dan menjadi jembatan antara frontend dan backend ML.
 
 2. **Flask Backend (Python)**  
-   Menyediakan API prediksi machine learning menggunakan model TensorFlow (.h5) dan scaler (.npy).
+   Menyediakan endpoint prediksi berbasis Machine Learning (TensorFlow).
 
 ---
 
-## Struktur Proyek
+## 📁 Struktur Direktori
 
 backend-growsmart/
-│
 ├── hapi-backend/
-├── lib/
+│ ├── lib/
 │ │ └── supabase.js
 │ ├── routes/
-│ │ └── index.js
-    └── auth.js
-    └── children.js
-    └── prediction.js
+│ │ ├── index.js
+│ │ ├── auth.js
+│ │ ├── children.js
+│ │ ├── prediction.js
+│ │ └── flask.js
+│ ├── .env
 │ ├── package.json
-│ └── .env
-  └── index.js
+│ └── index.js
 │
 ├── flask-backend/
 │ ├── model/
 │ │ ├── model.h5
 │ │ ├── scaler_mean.npy
-│ │ └── scaler_std.npy
+│ │ ├── scaler_std.npy
+│ │ └── normal_values.csv
 │ ├── app.py
+│ ├── predict_stunting.py
 │ ├── requirements.txt
-│ ├── venv/
-│ └── .env
+│ ├── .env
+│ └── venv/
 │
 └── README.md
+
 ---
 
-## Setup Backend Hapi.js
+## 🚀 Setup Hapi.js Backend
 
-### 1. Masuk ke folder `hapi-backend`
-
-```
+### 1. Masuk ke direktori `hapi-backend`
 cd hapi-backend
-2. Install dependencies
 
-
-
+### 2. Install dependencies
 npm install
-3. Konfigurasi .env
-Buat file .env dan isi URL backend Flask, contoh:
 
-ini
-
-
+### 3. Konfigurasi file .env
+Buat file .env dan isi seperti ini:
 FLASK_API_URL=http://localhost:5000
 PORT=3000
-4. Jalankan server Hapi.js
 
-
-
+### 4. Jalankan server Hapi.js
 npm start
-Server akan berjalan di http://localhost:3000.
+📌 Server berjalan di: http://localhost:3000
 
-Setup Backend Flask
-1. Masuk ke folder flask-backend
-
-
-
+🧠 Setup Flask Backend
+1. Masuk ke direktori flask-backend
+bash
+Salin
+Edit
 cd flask-backend
 2. Buat virtual environment dan aktifkan
-
-
-
+bash
+Salin
+Edit
 python3 -m venv venv
-source venv/bin/activate   # Linux/macOS
-venv\Scripts\activate      # Windows
+source venv/bin/activate       # Linux/macOS
+venv\Scripts\activate          # Windows
 3. Install dependencies
-
+bash
+Salin
+Edit
 pip install -r requirements.txt
+4. Letakkan file model di folder model/
+model.h5 — Model TensorFlow
 
-4. Letakkan file model di folder model/:
-model.h5 — model TensorFlow
+scaler_mean.npy — Mean dari scaler
 
-scaler_mean.npy — mean scaler
+scaler_std.npy — Std dev dari scaler
 
-scaler_std.npy — std scaler
+normal_values.csv — Nilai referensi TB/BB normal
 
 5. Jalankan server Flask
-
-
-
+bash
+Salin
+Edit
 python app.py
-Server Flask default berjalan di http://localhost:5000.
+📌 Server berjalan di: http://localhost:5000
 
-Cara Kerja
+🔄 Cara Kerja
 Frontend memanggil API di Hapi.js.
 
-Hapi.js akan memanggil API Flask untuk prediksi ML.
+Hapi.js meneruskan data ke Flask untuk prediksi.
 
-Flask memuat model TensorFlow dan scaler, mengolah input, dan mengembalikan prediksi.
+Flask memuat model TensorFlow, melakukan prediksi, dan mengembalikan hasil ke Hapi.js.
 
-Deployment
-Deploy backend Hapi.js dan Flask sebagai dua layanan terpisah di platform seperti Render, Heroku, atau Vercel (hanya untuk Hapi.js).
+Hapi.js mengirimkan hasil ke frontend.
 
-Pastikan environment variable di setiap layanan sudah disesuaikan.
+☁️ Deployment
+Deploy Hapi.js dan Flask sebagai dua layanan terpisah di platform seperti:
 
-Gunakan URL public Flask API di konfigurasi Hapi.js (FLASK_API_URL).
+Render
 
-Contoh Endpoint
-Hapi.js (Node.js)
-GET / — Cek server berjalan
+Railway
 
-POST /predict — Meneruskan data ke Flask dan mengembalikan hasil prediksi
+Heroku
 
-Flask (Python)
-POST /predict — Menerima data fitur dan mengembalikan hasil prediksi model
+Vercel (untuk Hapi.js saja)
 
-Kontak
-Jika ada pertanyaan atau butuh bantuan, hubungi saya.
+⚠️ Pastikan:
 
-Terima kasih sudah menggunakan GrowSmart Backend!
+Menggunakan URL publik Flask di .env Hapi.js (FLASK_API_URL)
+
+Environment variabel disesuaikan untuk masing-masing layanan
+
+📡 Contoh Endpoint
+🔷 Hapi.js (Node.js)
+Method	Endpoint	Deskripsi
+GET	/docs	Swagger API docs
+GET	/api/checking-flask	Cek koneksi ke server Flask
+POST	/api/predict	Prediksi cepat tanpa simpan data
+POST	/api/predictions	Prediksi dan simpan hasil (dengan auth)
+
+🟢 Flask (Python)
+Method	Endpoint	Deskripsi
+GET	/status	Cek status server Flask
+POST	/predict	Kirim data stunting (TB, BB, umur, dsb.) → hasil prediksi
+
+📬 Kontak
+Jika ada pertanyaan atau membutuhkan bantuan, silakan hubungi saya melalui email atau GitHub Issues pada repositori ini.
+
+Terima kasih sudah menggunakan GrowSmart Backend! 🌱💡
+
+
