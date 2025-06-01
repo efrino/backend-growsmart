@@ -1,4 +1,5 @@
 # 🌱 GrowSmart Backend
+# 🌱 GrowSmart Backend
 
 GrowSmart Backend terdiri dari dua layanan terpisah:
 
@@ -41,6 +42,7 @@ backend-growsmart/
 
 ---
 
+## 🚀 Setup Hapi.js Backend
 ## 🚀 Setup Hapi.js Backend
 
 ### 1. Masuk ke folder `hapi-backend`
