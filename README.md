@@ -143,7 +143,7 @@ Kamu bisa deploy **secara terpisah**:
 - Gunakan URL publik Flask di environment `.env` milik Hapi.js:
 
   ```env
-FLASK_API_URL=https://flask-backend-1s35.onrender.com/status
+  FLASK_API_URL=https://flask-backend-1s35.onrender.com/status
   ```
 
 - Pastikan environment variable disesuaikan di masing-masing platform.
